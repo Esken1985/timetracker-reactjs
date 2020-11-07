@@ -46,7 +46,7 @@ const Links = styled.div`
   align-items: center;
   padding: 23px 0;
 `;
-const LinkItem = styled.a`
+const LinkItem = styled(Link)`
   width: 20px;
   height: 20px;
   margin-right: 51px;

@@ -20,6 +20,7 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     font-weight: 400;
+    font-style: normal;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     vertical-align: baseline;
 }
