@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Container } from "../../styled/sharedStyled";
+import IssuesBlock from "./Main/IssuesBlock";
 import MainTop from "./Main/MainTop";
 
 const Grid = styled.div`
@@ -19,6 +20,7 @@ const HomePage = () => {
       <Grid>
         <Main>
             <MainTop />
+            <IssuesBlock />
         </Main>
         <Aside></Aside>
       </Grid>

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Container } from "../../../styled/sharedStyled";
 import datepicker from "../../../assets/datepicker.svg";
 
 const MainTopContainer = styled.div`
@@ -25,8 +24,8 @@ const Date = styled.p`
   font-size: 18px;
 `;
 const PickerImg = styled.img`
-padding-bottom: 6px;
-padding-left: 3px;
+  padding-bottom: 6px;
+  padding-left: 3px;
 `;
 const SortingLinks = styled.div`
   display: flex;
@@ -42,10 +41,11 @@ const SortingLink = styled.div`
   font-weight: 500;
   font-size: 18px;
   color: #bbbbbb;
+  cursor: pointer;
   &:first-child {
     margin-right: 20px;
   }
-  &:last-child{
+  &:last-child {
     margin-right: 131px;
   }
   &.active {
@@ -55,6 +55,26 @@ const SortingLink = styled.div`
 `;
 
 const MainTop = () => {
+  const [linkState, setState] = useState({
+    activeLink: "",
+    links: [{ text: "All" }, { text: "Favorites" }],
+  });
+
+  useEffect(() => {
+    setState({ ...linkState, activeLink: linkState.links[0] });
+  }, []);
+
+  function toggleActive(index) {
+    setState({ ...linkState, activeLink: linkState.links[index] });
+  }
+  function toggleActiveClass(index) {
+    if (linkState.links[index] === linkState.activeLink) {
+      return "active";
+    } else {
+      return "inactive";
+    }
+  }
+
   return (
     <MainTopContainer>
       <Datepicker>
@@ -62,8 +82,17 @@ const MainTop = () => {
         <PickerImg src={datepicker} />
       </Datepicker>
       <SortingLinks>
-        <SortingLink className="active">All</SortingLink>
-        <SortingLink>Favorites</SortingLink>
+        {linkState.links.map((link, index) => (
+          <SortingLink
+            key={index}
+            className={toggleActiveClass(index)}
+            onClick={() => {
+              toggleActive(index);
+            }}
+          >
+            {link.text}
+          </SortingLink>
+        ))}
       </SortingLinks>
     </MainTopContainer>
   );
