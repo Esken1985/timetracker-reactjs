@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
+import _ from "lodash";
+import { msToTime } from "../../../utils/utils.js";
 import { MainContainer } from "../../../styled/sharedStyled";
 import download from "../../../assets/dwnldBtn.svg";
 import ProgressBar from "../../../shared_components/ProgressBar";
@@ -55,19 +58,26 @@ const DwnldBtn = styled.div`
   margin-right: 35px;
 `;
 
-const IssuesBlockTop = () => {
+const IssuesBlockTop = ({ issuesByDate }) => {
+  const issueDate = issuesByDate.date;
+  const day = moment(issueDate).format("ddd");
+  const date = moment(issueDate).format("DD MMMM");
+  // *****summing up the total duration time****
+  const issuesDurationArr = issuesByDate.map((issue) => issue.duration);
+  const totalDuration = msToTime(_.sum(issuesDurationArr));
+  // ********************************************
   return (
     <MainContainer>
       <IssuesBlockTopContainer>
         <DateInfoDisplay>
-          <Day>Wed,</Day>
-          <Date>10 September</Date>
+          <Day>{day},</Day>
+          <Date>{date}</Date>
         </DateInfoDisplay>
         <DurationInfoDisplay>
           <Duration>
-            <DurationTime>06:00:10</DurationTime>
+            <DurationTime>{totalDuration}</DurationTime>
             <DurationProgressBar>
-              <ProgressBar percentage={42} color="#FFCC40"/>
+              <ProgressBar percentage={42} color="#FFCC40" />
             </DurationProgressBar>
           </Duration>
           <DwnldBtn>

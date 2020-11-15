@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
+import GrouppedIssues from "./GrouppedIssues";
 import Issue from "./Issue";
 import IssuesBlockTop from "./IssuesBlockTop";
 import IssuesTimeline from "./IssuesTimeline";
@@ -8,16 +9,17 @@ import IssuesTimeline from "./IssuesTimeline";
 const IssuesBlockContainer = styled.div`
   padding-top: 47px;
 `;
-const IssuesContainer = styled.div``;
 
-const IssuesBlock = () => {
+const IssuesBlock = ({ issuesByDate }) => {
+  console.log(issuesByDate);
   return (
     <MainContainer>
       <IssuesBlockContainer>
-        <IssuesBlockTop />
-        <IssuesContainer>
-            <Issue />
-        </IssuesContainer>
+        <IssuesBlockTop issuesByDate={issuesByDate} />
+        {issuesByDate.map((issue) => (
+          <Issue key={issue.id} issue={issue} />
+        ))}
+        {/* <GrouppedIssues /> */}
         <IssuesTimeline />
       </IssuesBlockContainer>
     </MainContainer>

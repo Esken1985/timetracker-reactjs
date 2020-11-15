@@ -4,6 +4,7 @@ import FilterPage from "./pages/Filter/FilterPage";
 import HomePage from "./pages/Home/HomePage";
 import IssuesPage from "./pages/Issues/IssuesPage";
 import ProjectsPage from "./pages/Projects/ProjectsPage";
+import Footer from "./shared_components/Footer";
 import Header from "./shared_components/Header";
 import { AppWrapper } from "./styled/sharedStyled";
 
@@ -27,6 +28,7 @@ const App = () => {
           </Route>
         </Switch>
       </AppWrapper>
+      <Footer />
     </>
   );
 };

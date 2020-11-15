@@ -6,6 +6,7 @@ const MainTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 96px;
+  /* padding-top: 81px; */
 `;
 const Datepicker = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const Datepicker = styled.div`
   background-color: ${(props) => props.theme.colors.light_grey};
 `;
 const Date = styled.p`
-  padding: 17px 0 23px 3px;
+  padding: 20px 0 20px 3px;
   margin-right: 18px;
   color: ${(props) => props.theme.colors.accent1};
   font-family: Roboto;
@@ -24,7 +25,6 @@ const Date = styled.p`
   font-size: 18px;
 `;
 const PickerImg = styled.img`
-  padding-bottom: 6px;
   padding-left: 3px;
 `;
 const SortingLinks = styled.div`

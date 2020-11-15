@@ -58,10 +58,14 @@ const ProfilePic = styled.div`
   margin-right: 61px;
   background-color: ${(props) => props.theme.colors.white};
 `;
+const StyledContainer = styled(Container)`
+  position: fixed;
+  z-index: 20;
+`;
 
 const Header = () => {
   return (
-    <Container>
+    <StyledContainer>
       <Flex>
         <Left>
           <NavList>
@@ -94,7 +98,7 @@ const Header = () => {
           </Links>
         </Right>
       </Flex>
-    </Container>
+    </StyledContainer>
   );
 };
 

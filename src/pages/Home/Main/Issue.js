@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
 import ProgressBar from "../../../shared_components/ProgressBar";
-import play from "../../../assets/playBtn.svg";
+import play from "../../../assets/grayPlayBtn.svg";
+import moment from "moment"
+import {msToTime} from "../../../utils/utils.js"
 
 const StyledMainContainer = styled(MainContainer)`
   position: relative;
@@ -13,7 +15,7 @@ const IssueContainer = styled.div`
   border-bottom: 1px dashed #e9ecf2;
   min-height: 88px;
   position: relative;
-  z-index: 5;
+  z-index: 1;
   &:hover {
     background-color: #ffffff;
     box-shadow: 0px 15px 30px rgba(216, 226, 232, 0.12);
@@ -22,15 +24,6 @@ const IssueContainer = styled.div`
   &:hover ~ .dropBox {
     display: block;
   }
-  /* &:hover:after{
-      content: ":";
-      width: 58px;
-      height: 86px;
-      background-color: blue;
-      position: absolute;
-      right: -25px;
-      z-index: 0;
-  } */
 `;
 const IssueLeft = styled.div`
   display: flex;
@@ -44,6 +37,8 @@ const IssueRight = styled.div`
 const IssueTime = styled.div`
   display: flex;
   padding-right: 32px;
+  min-width: 121px;
+  justify-content: center;
 `;
 const TimeFrom = styled.p`
   color: #1e1e1e;
@@ -97,6 +92,9 @@ const IssueButton = styled.div`
   justify-content: center;
   margin-right: 35px;
   margin-left: 36px;
+  & img {
+    width: 100%;
+  }
 `;
 const DropboxBlock = styled.div`
   width: 56px;
@@ -104,19 +102,19 @@ const DropboxBlock = styled.div`
   position: absolute;
   top: 0;
   right: -38px;
-  background-color: blue;
+  background-color: ${(props) => props.theme.colors.accent1};
   display: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   text-align: center;
   color: #ffffff;
-  & .dots{
+  & .dots {
     padding-left: 19px;
     padding-top: 21px;
     font-size: 36px;
   }
 `;
-const DropBox = styled.div`
+const DotsBox = styled.div`
   position: absolute;
   background-color: transparent;
   width: 40px;
@@ -124,33 +122,39 @@ const DropBox = styled.div`
   right: -37px;
 `;
 
-const Issue = () => {
+const Issue = ({issue}) => {
+  
+  const timeFrom = moment(issue.startedAt).format("HH:mm");
+  const timeTo = moment(issue.finishedAt).format("HH:mm");
+  const duration = msToTime(issue.duration);
   return (
     <StyledMainContainer>
       <IssueContainer className="container">
         <IssueLeft>
           <IssueTime>
-            <TimeFrom>09:00 </TimeFrom>
-            <TimeTo>-10:00</TimeTo>
+            <TimeFrom>{timeFrom}</TimeFrom>
+            <TimeTo>-{timeTo}</TimeTo>
           </IssueTime>
           <IssueState />
           <IssueInfo>
-            <JiraName>JRM-320</JiraName>
-            <WorklogName>Team Standup</WorklogName>
+            <JiraName>{issue.issue}</JiraName>
+            <WorklogName>{issue.worklog}</WorklogName>
           </IssueInfo>
         </IssueLeft>
         <IssueRight>
           <IssueProgressBar>
             <ProgressBar percentage={90} color="#62D2B1" />
           </IssueProgressBar>
-          <IssueDuration>01:00:00</IssueDuration>
+          <IssueDuration>{duration}</IssueDuration>
           <IssueButton>
             <img src={play} alt="play" />
           </IssueButton>
         </IssueRight>
-        <DropBox />
+        <DotsBox />
       </IssueContainer>
-      <DropboxBlock className="dropBox" ><div className="dots">:</div></DropboxBlock>
+      <DropboxBlock className="dropBox">
+        <div className="dots">:</div>
+      </DropboxBlock>
     </StyledMainContainer>
   );
 };

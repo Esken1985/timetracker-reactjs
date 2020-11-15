@@ -6,9 +6,10 @@ export const Container = styled.div`
 `;
 export const MainContainer = styled.div`
   width: 100%;
-  max-width: 1140px;
+  max-width: 1157px;
   margin: 0 auto;
 `;
 export const AppWrapper = styled.div`
+  min-height: calc(100vh - 58px);
   background-color: #e5e5e5;
 `;
