@@ -19,7 +19,8 @@ const Main = styled.main`
 const AsideContainer = styled.aside``;
 
 const HomePage = ({ issues }) => {
-  const issuesByDate = _.groupBy(issues, "date");
+  const reversedIssues = [...issues].reverse();
+  const issuesByDate = _.groupBy(reversedIssues, "date");
   return (
     <Container>
       <Grid>

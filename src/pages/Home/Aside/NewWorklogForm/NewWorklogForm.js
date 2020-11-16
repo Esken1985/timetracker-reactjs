@@ -140,7 +140,6 @@ const mapDispatchToProps = {
   createIssue,
 };
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     issues: state.issues.issues
   }

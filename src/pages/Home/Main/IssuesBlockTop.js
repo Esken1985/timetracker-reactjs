@@ -59,9 +59,8 @@ const DwnldBtn = styled.div`
 `;
 
 const IssuesBlockTop = ({ issuesByDate }) => {
-  const issueDate = issuesByDate.date;
-  const day = moment(issueDate).format("ddd");
-  const date = moment(issueDate).format("DD MMMM");
+  const day = moment().format("ddd");
+  const date = moment().format("DD MMMM");
   // *****summing up the total duration time****
   const issuesDurationArr = issuesByDate.map((issue) => issue.duration);
   const totalDuration = msToTime(_.sum(issuesDurationArr));

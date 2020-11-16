@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
 import ProgressBar from "../../../shared_components/ProgressBar";
 import play from "../../../assets/grayPlayBtn.svg";
-import moment from "moment"
-import {msToTime} from "../../../utils/utils.js"
+import moment from "moment";
+import { msToTime } from "../../../utils/utils.js";
+import { connect } from "react-redux";
+import { deleteIssue } from "../../../redux/actions/actionCreators";
+import Dropdown from "../../../shared_components/Dropdown";
 
 const StyledMainContainer = styled(MainContainer)`
   position: relative;
@@ -121,12 +124,22 @@ const DotsBox = styled.div`
   height: 100%;
   right: -37px;
 `;
+const DropdownContainer = styled.div`
+  position: absolute;
+  z-index: 5;
+  top: 90px;
+  right: -37px;
+`;
 
-const Issue = ({issue}) => {
-  
+const Issue = ({ issue, deleteIssue }) => {
+  const [isDropped, setIsDropped] = useState(false);
   const timeFrom = moment(issue.startedAt).format("HH:mm");
   const timeTo = moment(issue.finishedAt).format("HH:mm");
   const duration = msToTime(issue.duration);
+
+  const handleDeleteIssue = () => {
+    deleteIssue(issue.id);
+  };
   return (
     <StyledMainContainer>
       <IssueContainer className="container">
@@ -150,8 +163,11 @@ const Issue = ({issue}) => {
             <img src={play} alt="play" />
           </IssueButton>
         </IssueRight>
-        <DotsBox />
+        <DotsBox onClick={() => setIsDropped(!isDropped)} />
       </IssueContainer>
+      <DropdownContainer>
+        <Dropdown isDropped={isDropped}/>
+      </DropdownContainer>
       <DropboxBlock className="dropBox">
         <div className="dots">:</div>
       </DropboxBlock>
@@ -159,4 +175,8 @@ const Issue = ({issue}) => {
   );
 };
 
-export default Issue;
+const mapDispatchToProps = {
+  deleteIssue,
+};
+
+export default connect(null, mapDispatchToProps)(Issue);

@@ -11,7 +11,7 @@ const IssuesBlockContainer = styled.div`
 `;
 
 const IssuesBlock = ({ issuesByDate }) => {
-  console.log(issuesByDate);
+  console.log(issuesByDate.date);
   return (
     <MainContainer>
       <IssuesBlockContainer>
