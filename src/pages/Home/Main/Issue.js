@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
 import ProgressBar from "../../../shared_components/ProgressBar";
+import { deleteIssue } from "../../../redux/actions/actionCreators";
 import play from "../../../assets/grayPlayBtn.svg";
 import moment from "moment";
 import { msToTime } from "../../../utils/utils.js";
 import { connect } from "react-redux";
-import { deleteIssue } from "../../../redux/actions/actionCreators";
 import Dropdown from "../../../shared_components/Dropdown";
 
 const StyledMainContainer = styled(MainContainer)`
@@ -89,7 +89,7 @@ const IssueButton = styled.div`
   height: 38px;
   width: 38px;
   border-radius: 50%;
-  background-color: ${(props) => props.theme.colors.stroke};
+  background-color: #F0F3F5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,10 +136,10 @@ const Issue = ({ issue, deleteIssue }) => {
   const timeFrom = moment(issue.startedAt).format("HH:mm");
   const timeTo = moment(issue.finishedAt).format("HH:mm");
   const duration = msToTime(issue.duration);
-
   const handleDeleteIssue = () => {
     deleteIssue(issue.id);
   };
+
   return (
     <StyledMainContainer>
       <IssueContainer className="container">
@@ -166,7 +166,7 @@ const Issue = ({ issue, deleteIssue }) => {
         <DotsBox onClick={() => setIsDropped(!isDropped)} />
       </IssueContainer>
       <DropdownContainer>
-        <Dropdown isDropped={isDropped}/>
+        <Dropdown isDropped={isDropped} deleteIssue={handleDeleteIssue} />
       </DropdownContainer>
       <DropboxBlock className="dropBox">
         <div className="dots">:</div>

@@ -41,12 +41,11 @@ const Dropdown = ({ isDropped, deleteIssue }) => {
     <DropdownBox className={isDropped ? "dropped" : ""}>
       <DropdownContainer>
         <DropdownItem>
-          {" "}
           <Link href="#">Jira link</Link>
         </DropdownItem>
         <DropdownItem>Duplicate</DropdownItem>
         <DropdownItem>Add to favorite</DropdownItem>
-        <DropdownItem>Delete</DropdownItem>
+        <DropdownItem onClick={deleteIssue}>Delete</DropdownItem>
       </DropdownContainer>
     </DropdownBox>
   );

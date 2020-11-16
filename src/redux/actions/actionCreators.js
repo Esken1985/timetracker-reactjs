@@ -9,6 +9,6 @@ export function createIssue(issue) {
 export function deleteIssue(id) {
   return {
     type: DELETE_ISSUE,
-    payload: id,
+    id,
   };
 }

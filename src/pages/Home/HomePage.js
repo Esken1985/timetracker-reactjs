@@ -1,9 +1,10 @@
 import React from "react";
 import _ from "lodash";
-import moment from "moment";
+// import moment from "moment";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Container } from "../../styled/sharedStyled";
+import { deleteIssue } from "../../redux/actions/actionCreators";
 import Aside from "./Aside/Aside";
 import IssuesBlock from "./Main/IssuesBlock";
 import MainTop from "./Main/MainTop";
@@ -18,9 +19,13 @@ const Main = styled.main`
 `;
 const AsideContainer = styled.aside``;
 
-const HomePage = ({ issues }) => {
+const HomePage = ({ issues, deleteIssue }) => {
+  const handleDeleteIssue = () => {
+    
+  };
   const reversedIssues = [...issues].reverse();
   const issuesByDate = _.groupBy(reversedIssues, "date");
+  console.log(issuesByDate);
   return (
     <Container>
       <Grid>
@@ -30,7 +35,11 @@ const HomePage = ({ issues }) => {
             <h1>No worklogs have been added</h1>
           ) : (
             Object.entries(issuesByDate).map(([key, value]) => (
-              <IssuesBlock key={key} issuesByDate={value} />
+              <IssuesBlock
+                key={key}
+                issuesByDate={value}
+                deleteIssue={handleDeleteIssue}
+              />
             ))
           )}
           {/* <IssuesBlock issues={issues} /> */}
@@ -48,6 +57,8 @@ const mapStateToProps = (state) => {
     issues: state.issues.issues,
   };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  deleteIssue,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

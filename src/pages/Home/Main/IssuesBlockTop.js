@@ -56,6 +56,10 @@ const DwnldBtn = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 35px;
+  &:hover{
+    background-color: #ffffff;
+    transition: all 0.3s;
+  }
 `;
 
 const IssuesBlockTop = ({ issuesByDate }) => {
