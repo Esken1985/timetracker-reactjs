@@ -36,7 +36,7 @@ const Link = styled.a`
   text-decoration: none;
 `;
 
-const Dropdown = ({ isDropped, deleteIssue }) => {
+const Dropdown = ({ isDropped, deleteIssue, addFavorite }) => {
   return (
     <DropdownBox className={isDropped ? "dropped" : ""}>
       <DropdownContainer>
@@ -44,7 +44,7 @@ const Dropdown = ({ isDropped, deleteIssue }) => {
           <Link href="#">Jira link</Link>
         </DropdownItem>
         <DropdownItem>Duplicate</DropdownItem>
-        <DropdownItem>Add to favorite</DropdownItem>
+        <DropdownItem onClick={addFavorite} >Add to favorite</DropdownItem>
         <DropdownItem onClick={deleteIssue}>Delete</DropdownItem>
       </DropdownContainer>
     </DropdownBox>

@@ -1,2 +1,3 @@
 export const CREATE_ISSUE = "CREATE_ISSUE";
 export const DELETE_ISSUE = "DELETE_ISSUE";
+export const ADD_FAVORITE = "ADD_FAVORITE";

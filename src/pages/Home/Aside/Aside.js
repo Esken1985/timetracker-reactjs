@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../../../shared_components/Modal/Modal";
 import AddWorklog from "./AddWorklog/AddWorklog";
@@ -17,6 +17,7 @@ const Aside = () => {
   const [startTime, setStartTime] = useState({ startedAt: "" });
   const [finishTime, setFinishTime] = useState({ finishedAt: "" });
   const [submitted, setSubmitted] = useState(false);
+
 
   const startStopwatch = () => {
     setStopwatchOn(true);

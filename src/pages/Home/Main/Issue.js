@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
 import ProgressBar from "../../../shared_components/ProgressBar";
-import { deleteIssue } from "../../../redux/actions/actionCreators";
+import { deleteIssue, addFavorite } from "../../../redux/actions/actionCreators";
 import play from "../../../assets/grayPlayBtn.svg";
 import moment from "moment";
 import { msToTime } from "../../../utils/utils.js";
@@ -89,7 +89,7 @@ const IssueButton = styled.div`
   height: 38px;
   width: 38px;
   border-radius: 50%;
-  background-color: #F0F3F5;
+  background-color: #f0f3f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,7 +131,7 @@ const DropdownContainer = styled.div`
   right: -37px;
 `;
 
-const Issue = ({ issue, deleteIssue }) => {
+const Issue = ({ issue, deleteIssue, addFavorite }) => {
   const [isDropped, setIsDropped] = useState(false);
   const timeFrom = moment(issue.startedAt).format("HH:mm");
   const timeTo = moment(issue.finishedAt).format("HH:mm");
@@ -139,6 +139,9 @@ const Issue = ({ issue, deleteIssue }) => {
   const handleDeleteIssue = () => {
     deleteIssue(issue.id);
   };
+  const handleAddFavorite = () => {
+    addFavorite(issue.id)
+  }
 
   return (
     <StyledMainContainer>
@@ -165,8 +168,8 @@ const Issue = ({ issue, deleteIssue }) => {
         </IssueRight>
         <DotsBox onClick={() => setIsDropped(!isDropped)} />
       </IssueContainer>
-      <DropdownContainer>
-        <Dropdown isDropped={isDropped} deleteIssue={handleDeleteIssue} />
+      <DropdownContainer className="dropdown">
+        <Dropdown isDropped={isDropped} deleteIssue={handleDeleteIssue} addFavorite={handleAddFavorite} />
       </DropdownContainer>
       <DropboxBlock className="dropBox">
         <div className="dots">:</div>
@@ -177,6 +180,7 @@ const Issue = ({ issue, deleteIssue }) => {
 
 const mapDispatchToProps = {
   deleteIssue,
+  addFavorite
 };
 
 export default connect(null, mapDispatchToProps)(Issue);

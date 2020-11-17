@@ -7,26 +7,6 @@ const MainTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-left: 96px;
-  /* padding-top: 81px; */
-`;
-const DatepickerInput = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 197px;
-  border-radius: 30px;
-  background-color: ${(props) => props.theme.colors.light_grey};
-`;
-const Date = styled.p`
-  padding: 20px 0 20px 3px;
-  margin-right: 18px;
-  color: ${(props) => props.theme.colors.accent1};
-  font-family: Roboto;
-  font-style: normal;
-  font-size: 18px;
-`;
-const PickerImg = styled.img`
-  padding-left: 3px;
 `;
 const SortingLinks = styled.div`
   display: flex;
@@ -55,7 +35,7 @@ const SortingLink = styled.div`
   }
 `;
 
-const MainTop = () => {
+const MainTop = ({setShowFavorite}) => {
   const [linkState, setState] = useState({
     activeLink: "",
     links: [{ text: "All" }, { text: "Favorites" }],
@@ -75,14 +55,17 @@ const MainTop = () => {
       return "inactive";
     }
   }
+  function toggleFavorite(index){
+    if (linkState.links[1] === linkState.activeLink) {
+      setShowFavorite(false)
+    } else {
+      setShowFavorite(true)
+    }
+  }
 
   return (
     <MainTopContainer>
     <CustomDatepicker />
-      {/* <DatepickerInput>
-        <Date>10 June 2020</Date>
-        <PickerImg src={datepicker} />
-      </DatepickerInput> */}
       <SortingLinks>
         {linkState.links.map((link, index) => (
           <SortingLink
@@ -90,6 +73,7 @@ const MainTop = () => {
             className={toggleActiveClass(index)}
             onClick={() => {
               toggleActive(index);
+              toggleFavorite(index);
             }}
           >
             {link.text}

@@ -2,6 +2,13 @@ import { createGlobalStyle } from "styled-components";
 
 
 const GlobalStyles = createGlobalStyle`
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,6 +32,7 @@ time, mark, audio, video {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     vertical-align: baseline;
 }
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
     display: block;

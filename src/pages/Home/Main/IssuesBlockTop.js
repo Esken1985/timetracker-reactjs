@@ -66,7 +66,6 @@ const IssuesBlockTop = ({ issuesByDate }) => {
   const issueDate = _.find(issuesByDate, 'date');
   const day = moment(issueDate.date).format("ddd");
   const date = moment(issueDate.date).format("DD MMMM");
-  console.log(issueDate);
   // *****summing up the total duration time****
   const issuesDurationArr = issuesByDate.map((issue) => issue.duration);
   const totalDuration = msToTime(_.sum(issuesDurationArr));

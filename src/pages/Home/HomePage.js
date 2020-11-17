@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import _ from "lodash";
 // import moment from "moment";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Container } from "../../styled/sharedStyled";
-import { deleteIssue } from "../../redux/actions/actionCreators";
 import Aside from "./Aside/Aside";
 import IssuesBlock from "./Main/IssuesBlock";
 import MainTop from "./Main/MainTop";
@@ -19,30 +18,21 @@ const Main = styled.main`
 `;
 const AsideContainer = styled.aside``;
 
-const HomePage = ({ issues, deleteIssue }) => {
-  const handleDeleteIssue = () => {
-    
-  };
+const HomePage = ({ issues }) => {
+  const [showFavoriteOnly, setShowFavoriteOnly] = useState(false);
   const reversedIssues = [...issues].reverse();
   const issuesByDate = _.groupBy(reversedIssues, "date");
-  console.log(issuesByDate);
+  // const favoriteIssues = _.filter(reversedIssues, function (obj) {
+  //   return obj.favorite === true;
+  // });
   return (
     <Container>
       <Grid>
         <Main>
-          <MainTop />
-          {!issues.length ? (
-            <h1>No worklogs have been added</h1>
-          ) : (
-            Object.entries(issuesByDate).map(([key, value]) => (
-              <IssuesBlock
-                key={key}
-                issuesByDate={value}
-                deleteIssue={handleDeleteIssue}
-              />
-            ))
-          )}
-          {/* <IssuesBlock issues={issues} /> */}
+          <MainTop setShowFavorite={setShowFavoriteOnly} />
+          {Object.entries(issuesByDate).map(([key, value]) => (
+            <IssuesBlock key={key} issuesByDate={value} />
+          ))}
         </Main>
         <AsideContainer>
           <Aside />
@@ -57,8 +47,6 @@ const mapStateToProps = (state) => {
     issues: state.issues.issues,
   };
 };
-const mapDispatchToProps = {
-  deleteIssue,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
