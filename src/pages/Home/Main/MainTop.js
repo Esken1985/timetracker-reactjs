@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import datepicker from "../../../assets/datepicker.svg";
+import CustomDatepicker from "../../../shared_components/Datepicker/CustomDatepicker";
 
 const MainTopContainer = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const MainTopContainer = styled.div`
   padding-left: 96px;
   /* padding-top: 81px; */
 `;
-const Datepicker = styled.div`
+const DatepickerInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,10 +78,11 @@ const MainTop = () => {
 
   return (
     <MainTopContainer>
-      <Datepicker>
+    <CustomDatepicker />
+      {/* <DatepickerInput>
         <Date>10 June 2020</Date>
         <PickerImg src={datepicker} />
-      </Datepicker>
+      </DatepickerInput> */}
       <SortingLinks>
         {linkState.links.map((link, index) => (
           <SortingLink
