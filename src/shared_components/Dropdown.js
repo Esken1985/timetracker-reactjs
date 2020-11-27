@@ -6,6 +6,7 @@ const DropdownBox = styled.div`
   box-shadow: 0px 15px 30px rgba(216, 226, 232, 0.12);
   border-radius: 10px;
   display: none;
+  border: 1px dashed #e9ecf2;
   transition: all 0.2s;
   &.dropped {
     display: block;

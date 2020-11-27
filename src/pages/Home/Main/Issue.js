@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MainContainer } from "../../../styled/sharedStyled";
 import ProgressBar from "../../../shared_components/ProgressBar";
-import { deleteIssue, addFavorite } from "../../../redux/actions/actionCreators";
+import {
+  deleteIssue,
+  addFavorite,
+} from "../../../redux/actions/actionCreators";
 import play from "../../../assets/grayPlayBtn.svg";
 import moment from "moment";
 import { msToTime } from "../../../utils/utils.js";
@@ -11,6 +14,14 @@ import Dropdown from "../../../shared_components/Dropdown";
 
 const StyledMainContainer = styled(MainContainer)`
   position: relative;
+  .hovered {
+    background-color: #ffffff;
+    box-shadow: 0px 15px 30px rgba(216, 226, 232, 0.12);
+    border-radius: 10px;
+  }
+  & .hoveredDropbox {
+    display: block;
+  }
 `;
 const IssueContainer = styled.div`
   display: flex;
@@ -127,12 +138,13 @@ const DotsBox = styled.div`
 const DropdownContainer = styled.div`
   position: absolute;
   z-index: 5;
-  top: 90px;
+  top: 89px;
   right: -37px;
 `;
 
 const Issue = ({ issue, deleteIssue, addFavorite }) => {
   const [isDropped, setIsDropped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const timeFrom = moment(issue.startedAt).format("HH:mm");
   const timeTo = moment(issue.finishedAt).format("HH:mm");
   const duration = msToTime(issue.duration);
@@ -140,12 +152,19 @@ const Issue = ({ issue, deleteIssue, addFavorite }) => {
     deleteIssue(issue.id);
   };
   const handleAddFavorite = () => {
-    addFavorite(issue.id)
-  }
+    addFavorite(issue.id);
+  };
+  const addHoverEffect = () => {
+    setIsHovered(true);
+    setIsDropped(!isDropped);
+  };
 
   return (
     <StyledMainContainer>
-      <IssueContainer className="container">
+      <IssueContainer
+        className={isHovered ? "hovered" : null}
+        onMouseLeave={() => setIsDropped(false) || setIsHovered(false)}
+      >
         <IssueLeft>
           <IssueTime>
             <TimeFrom>{timeFrom}</TimeFrom>
@@ -166,12 +185,22 @@ const Issue = ({ issue, deleteIssue, addFavorite }) => {
             <img src={play} alt="play" />
           </IssueButton>
         </IssueRight>
-        <DotsBox onClick={() => setIsDropped(!isDropped)} />
+        <DotsBox onClick={() => addHoverEffect(issue.id)} />
       </IssueContainer>
-      <DropdownContainer className="dropdown">
-        <Dropdown isDropped={isDropped} deleteIssue={handleDeleteIssue} addFavorite={handleAddFavorite} />
+      <DropdownContainer
+        className="dropdown"
+        onMouseLeave={() => setIsDropped(false) & setIsHovered(false)}
+        onMouseOver={() => setIsDropped(true) & setIsHovered(true)}
+      >
+        <Dropdown
+          isDropped={isDropped}
+          deleteIssue={handleDeleteIssue}
+          addFavorite={handleAddFavorite}
+        />
       </DropdownContainer>
-      <DropboxBlock className="dropBox">
+      <DropboxBlock
+        className={`dropBox ${isHovered ? "hoveredDropbox" : ""}`}
+      >
         <div className="dots">:</div>
       </DropboxBlock>
     </StyledMainContainer>
@@ -180,7 +209,7 @@ const Issue = ({ issue, deleteIssue, addFavorite }) => {
 
 const mapDispatchToProps = {
   deleteIssue,
-  addFavorite
+  addFavorite,
 };
 
 export default connect(null, mapDispatchToProps)(Issue);

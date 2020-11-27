@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import _ from "lodash";
-// import moment from "moment";
+import moment from "moment";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Container } from "../../styled/sharedStyled";

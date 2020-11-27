@@ -82,6 +82,7 @@ const NewWorklogForm = ({ closeModal, startTime, finishTime, createIssue, setSub
       worklog: values.worklog,
       issue: values.issue,
       date:  moment().format('YYYY:MM:DD'),
+      blockDate: Date.now(),
       startedAt: startTime,
       finishedAt: finishTime,
       duration: finishTime - startTime,

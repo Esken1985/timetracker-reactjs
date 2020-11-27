@@ -25,6 +25,7 @@ const DurationInfoDisplay = styled.div`
 `;
 const Day = styled.div`
   font-weight: bold;
+  margin-right: 5px;
 `;
 const Date = styled.div`
   font-weight: normal;
@@ -63,9 +64,9 @@ const DwnldBtn = styled.div`
 `;
 
 const IssuesBlockTop = ({ issuesByDate }) => {
-  const issueDate = _.find(issuesByDate, 'date');
-  const day = moment(issueDate.date).format("ddd");
-  const date = moment(issueDate.date).format("DD MMMM");
+  const issueBlockDate = issuesByDate.find(issue => issue.blockDate).blockDate;
+  const day = moment(issueBlockDate).format("ddd");
+  const date = moment(issueBlockDate).format("DD MMMM");
   // *****summing up the total duration time****
   const issuesDurationArr = issuesByDate.map((issue) => issue.duration);
   const totalDuration = msToTime(_.sum(issuesDurationArr));

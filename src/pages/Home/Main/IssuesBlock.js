@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import _ from "lodash";
 import { MainContainer } from "../../../styled/sharedStyled";
 import Issue from "./Issue";
 import IssuesBlockTop from "./IssuesBlockTop";
