@@ -5,19 +5,15 @@ import { MainContainer } from "../../../styled/sharedStyled";
 import Issue from "./Issue/Issue";
 import IssuesBlockTop from "./IssuesBlockTop";
 import IssuesTimeline from "./IssuesTimeline";
-import GrouppedIssues from "./GrouppedIssues";
+import SameIssues from "./SameIssues/SameIssues";
 
 const IssuesBlockContainer = styled.div`
   padding-top: 47px;
 `;
 
 const IssuesBlock = ({ issuesByDate }) => {
-  // const issueHashMap = {};
-  // let uniqueIssues = issuesByDate.filter((item, _) => {
-  //   let alreadyExists = issueHashMap.hasOwnProperty(item.issue || item.worklog)
 
-  //   return alreadyExists ? false : issueHashMap[item.issue || item.worklog] = 1;
-  // })
+  /********* Grouping The Issues by the same issue name and worklog name*********/
   let issuesByValue = issuesByDate.reduce(function (hash, issue) {
     if (!hash.hasOwnProperty(issue.issue && issue.worklog))
       hash[issue.issue && issue.worklog] = [];
@@ -28,6 +24,7 @@ const IssuesBlock = ({ issuesByDate }) => {
   let groupedByValue = Object.keys(issuesByValue).map(function (key) {
     return issuesByValue[key];
   });
+  /******************************************************************************/
 
   return (
     <MainContainer>
@@ -36,7 +33,7 @@ const IssuesBlock = ({ issuesByDate }) => {
         {groupedByValue.map((nested) => (
           nested.length === 1
             ? nested.map((issue) => <Issue key={issue.id} issue={issue} />)
-            : null
+            : <SameIssues issues={nested}/>
         ))}
         {/* {issuesByDate.map((issue) => (
           <Issue key={issue.id} issue={issue} />
