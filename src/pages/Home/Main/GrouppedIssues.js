@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Issue from "./Issue";
+import Issue from "./Issue/Issue";
 
 const SingleAccordion = styled.div``;
 const Tab = styled.div``;
@@ -12,14 +12,14 @@ const Content = styled.div`
   }
 `;
 
-const GrouppedIssues = () => {
+const GrouppedIssues = ({issue}) => {
   return (
     <SingleAccordion>
       <Tab>
-          
+          Accordion Header
       </Tab>
       <Content>
-        <Issue />
+        <Issue issue={issue}/>
       </Content>
     </SingleAccordion>
   );

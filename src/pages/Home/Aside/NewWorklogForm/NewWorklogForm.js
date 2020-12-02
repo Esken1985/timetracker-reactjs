@@ -87,7 +87,8 @@ const NewWorklogForm = ({ closeModal, startTime, finishTime, createIssue, setSub
       finishedAt: finishTime,
       duration: finishTime - startTime,
       id: uuid(),
-      favorite: false
+      favorite: false,
+      same: false
     };
     createIssue(newIssue);
     setSubmitted(true);
